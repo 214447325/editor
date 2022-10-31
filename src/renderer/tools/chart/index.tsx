@@ -32,24 +32,18 @@ export default class PreviewPlugin extends AbstractEditorPlugin<{}> {
 
     private setPageCharts(e, res) {
         console.log(e)
-        let $chartId: any = $('.boxsw');
-        let $children: any = $chartId.children('.chartPre');
-        let id: string = '';
-        if ($children) {
+        let $chartId:any = $('#chartId');
+        let $children:any = $chartId.children('#chartId');
+        let id:string = '';
+        if($children) {
             let code: any = $children.eq(-1).attr('code');
-            if (!code) {
+            if(!code) {
                 code = 0
             }
             if (typeof code === "string") {
                 code = parseInt(code) + 1;
             }
-            $chartId.append(`<div class="chartPre" 
-                            style="position: absolute;width:200px;
-                            height: 200px;
-                            top: 0;
-                            left: 0;
-                            z-index:1000;
-                                id="charts${code}" code="${code}">${res.name}</div>`)
+            $chartId.append(`<div class="chartPre" id="charts${code}" code="${code}">${res.name}</div>`)
             id = `charts${code}`;
         } else {
             $chartId.append(`<div class="chartPre" id="charts1" code="1">${res.name}</div>`)
@@ -68,7 +62,7 @@ export default class PreviewPlugin extends AbstractEditorPlugin<{}> {
                 break
             }
 
-            case 2: {//折线图
+            case 2:{//折线图
                 this.setLineChart(id)
                 break
             }
@@ -78,7 +72,7 @@ export default class PreviewPlugin extends AbstractEditorPlugin<{}> {
 
     private setBarChart(id) {
         console.log('0000')
-        let chartDom: any = document.getElementById(id);
+        let chartDom:any = document.getElementById(id);
         let myChart = echarts.init(chartDom);
         let option;
 
@@ -106,7 +100,7 @@ export default class PreviewPlugin extends AbstractEditorPlugin<{}> {
     }
 
     private setPieChart(id) {
-        let chartDom: any = document.getElementById(id);
+        let chartDom:any = document.getElementById(id);
         let myChart = echarts.init(chartDom);
         let option;
 
@@ -129,11 +123,11 @@ export default class PreviewPlugin extends AbstractEditorPlugin<{}> {
                     type: 'pie',
                     radius: '50%',
                     data: [
-                        {value: 1048, name: 'Search Engine'},
-                        {value: 735, name: 'Direct'},
-                        {value: 580, name: 'Email'},
-                        {value: 484, name: 'Union Ads'},
-                        {value: 300, name: 'Video Ads'}
+                        { value: 1048, name: 'Search Engine' },
+                        { value: 735, name: 'Direct' },
+                        { value: 580, name: 'Email' },
+                        { value: 484, name: 'Union Ads' },
+                        { value: 300, name: 'Video Ads' }
                     ],
                     emphasis: {
                         itemStyle: {
@@ -152,7 +146,7 @@ export default class PreviewPlugin extends AbstractEditorPlugin<{}> {
 
 
     private setLineChart(id) {
-        let chartDom: any = document.getElementById(id);
+        let chartDom:any = document.getElementById(id);
         let myChart = echarts.init(chartDom);
         let option;
 
@@ -174,7 +168,6 @@ export default class PreviewPlugin extends AbstractEditorPlugin<{}> {
 
         option && myChart.setOption(option);
     }
-
     /**
      * Renders the component.
      */

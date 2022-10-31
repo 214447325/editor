@@ -500,3 +500,9 @@ html, body {
 [data-tooltip]:not([data-tooltip-persistent]):before {
     pointer-events: none;
 }
+
+.chartPre {
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+}

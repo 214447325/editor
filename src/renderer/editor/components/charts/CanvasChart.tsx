@@ -21,20 +21,20 @@ export class CanvasChart extends React.Component<any, any>{
 
         return (
             <>
-                {/*<div className="charts" id="chartId" style={{*/}
+                <div className="charts" id="chartId" style={{
 
-                {/*    width:'100%',*/}
-                {/*    height:'100%',*/}
-                {/*    position:'absolute',*/}
-                {/*    top:'0',*/}
-                {/*    left:'0',*/}
-                {/*    display:'flex'*/}
+                    width:'100%',
+                    height:'100%',
+                    position:'absolute',
+                    top:'0',
+                    left:'0',
+                    display:'flex'
 
-                {/*}} onDragLeave={(res) => {*/}
-                {/*    console.log('|||||||||');*/}
-                {/*    console.log(res)*/}
-                {/*}}></div>*/}
-                <div></div>
+                }} onDragLeave={(res) => {
+                    console.log('|||||||||');
+                    console.log(res)
+                }}></div>
+
             </>
         )
     }
