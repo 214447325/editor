@@ -192,7 +192,7 @@ export class SceneExporter {
 			default: { enabled: SceneSettings.IsDefaultPipelineEnabled(), json: SceneSettings.SerializeDefaultPipeline() },
 			motionBlur: { enabled: SceneSettings.IsMotionBlurEnabled(), json: SceneSettings.MotionBlurPostProcess?.serialize() },
 			test:"ffff",
-			charts:charts
+			charts:JSON.parse(charts)
 		};
 
 

@@ -514,7 +514,11 @@ html, body {
 }
 
 .chartPre {
-    width: 200px;
-    height: 200px;
+    width: auto;
+    height: auto;
     margin: 10px;
+    position: absolute;
+    top: 0;
+    z-index: 1000;
+    left: 0;
 }

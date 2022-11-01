@@ -21,6 +21,7 @@ export class CanvasChart extends React.Component<any, any>{
 
         return (
             <>
+                <div></div>
                 {/* <div className="charts" id="chartId" style={{
 
                     width:'100%',

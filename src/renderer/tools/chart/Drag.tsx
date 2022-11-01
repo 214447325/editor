@@ -38,7 +38,7 @@ const Drag = (props) => {
         // @ts-ignore
         div.style.left = left + deltaX + "px";
         position = [event.clientX, event.clientY];
-        
+
         setData(div)
     };
 
@@ -46,18 +46,18 @@ const Drag = (props) => {
     const setData = (div) => {
         console.log('--------------------------------------------------');
         // @ts-ignore
-       console.log(div.style.cssText)
+        console.log(div.style.cssText)
 
-       // @ts-ignore
-       let charts: any = JSON.parse(sessionStorage.getItem('charts')) ?JSON.parse(sessionStorage.getItem('charts')) :[];
-       const id = `cid${props.id}`
-       let _json_ = {
-        option:props.option,
-        style:div.style ? div.style.cssText : '',
-        id:id
-       }
-        
-       let k = true;
+        // @ts-ignore
+        let charts: any = JSON.parse(sessionStorage.getItem('charts')) ?JSON.parse(sessionStorage.getItem('charts')) :[];
+        const id = `cid${props.id}`
+        let _json_ = {
+            option:props.option,
+            style:div.style ? div.style.cssText : '',
+            id:id
+        }
+
+        let k = true;
         for(let i in charts) {
             if(charts[i].id == id) {
                 charts[i] = _json_;
@@ -68,7 +68,7 @@ const Drag = (props) => {
             charts.push(_json_)
         }
 
-        sessionStorage.setItem('charts',JSON.stringify(charts))  
+        sessionStorage.setItem('charts',JSON.stringify(charts))
 
     }
 
@@ -81,7 +81,7 @@ const Drag = (props) => {
         // top: `0px`,
         // left: `0px`
     };
-    
+
     return (
 
         <div
@@ -93,13 +93,13 @@ const Drag = (props) => {
             ref={movingDiv}
             style={{ ...styles, ...props.style }} //样式可自定义并覆盖
         >
-            
-            <div 
-             // @ts-ignore
-            style={styless}
-            id={
-                 // @ts-ignore
-                'cid' + props.id}></div>
+
+            <div
+                // @ts-ignore
+                style={styless}
+                id={
+                    // @ts-ignore
+                    'cid' + props.id}></div>
         </div>
     );
 };

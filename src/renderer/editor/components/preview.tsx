@@ -265,7 +265,7 @@ export class Preview extends React.Component<IPreviewProps, IPreviewState> {
                         </Tooltip>
                     </ButtonGroup>
                 </div>
-                <div style={{ height: "calc(100% - 25px)",position:'relative' }} className="boxsw">
+                <div style={{ height: "calc(100% - 25px)",position:'relative',overflow:'hidden' }} className="boxsw">
                     {/*//@ts-ignore*/}
                     <CanvasChart />
                     <canvas id="renderCanvas" style={{ width: "100%", height: "100%", position: "unset", top: "0", touchAction: "none", display: displayPlayIframe ? "none" : "block" }}></canvas>
