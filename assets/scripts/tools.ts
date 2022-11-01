@@ -31,6 +31,8 @@ import "@babylonjs/core/Materials/Textures/Loaders/ktxTextureLoader";
 
 import { ISceneScriptMap } from "./scripts-map";
 
+import {chartsInit} from './charts';
+
 export type NodeScriptConstructor = (new (...args: any[]) => Node);
 export type GraphScriptConstructor = (new (scene: Scene) => any);
 export type ScriptMap = {
@@ -447,7 +449,8 @@ function requireScriptForNodes(scene: Scene, scriptsMap: ISceneScriptMap, nodes:
  */
 export async function runScene(scene: Scene, rootUrl?: string): Promise<void> {
     const scriptsMap = require("./scripts-map").scriptsMap;
-
+    console.log('11111111111111112334444');
+    chartsInit(scriptsMap,scene)
     // Attach scripts to objects in scene.
     attachScripts(scriptsMap, scene);
 

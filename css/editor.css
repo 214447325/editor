@@ -501,6 +501,18 @@ html, body {
     pointer-events: none;
 }
 
+.chartbox {
+    width: auto;
+    height: auto;
+    display: flex;
+}
+
+.chart1{
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+}
+
 .chartPre {
     width: 200px;
     height: 200px;
