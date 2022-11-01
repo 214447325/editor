@@ -9,6 +9,8 @@ import {
     applyMeshesPoseMatrices, applyMeshColliders,
 } from "../tools";
 
+import {chartsInit} from '../charts';
+
 import { scriptsMap } from "../scripts-map";
 
 /**
@@ -31,6 +33,8 @@ export async function runScene(scene: Scene, rootUrl?: string): Promise<void> {
 
     // Apply colliders
     applyMeshColliders(scene);
+
+    chartsInit(scriptsMap,scene)
 }
 
 /**

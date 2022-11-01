@@ -7,20 +7,19 @@ import $ from 'jquery'
 import * as React from "react";
 
 import * as echarts from 'echarts';
-
-// import { Classes, ButtonGroup, Button } from "@blueprintjs/core";
-
+import { Scene} from "babylonjs";
 import {AbstractEditorPlugin} from "../../editor/tools/plugin";
 
 export const title = "图表添加";
 
 export default class PreviewPlugin extends AbstractEditorPlugin<{}> {
 
+    scene:Scene
 
     constructor(props) {
         super(props);
         // this.state = {
-        //     chartArray:
+        //     charts:
         // }
     }
 
@@ -32,23 +31,13 @@ export default class PreviewPlugin extends AbstractEditorPlugin<{}> {
 
     private setPageCharts(e, res) {
         console.log(e)
-        let $chartId:any = $('#chartId');
-        let $children:any = $chartId.children('#chartId');
-        let id:string = '';
-        if($children) {
-            let code: any = $children.eq(-1).attr('code');
-            if(!code) {
-                code = 0
-            }
-            if (typeof code === "string") {
-                code = parseInt(code) + 1;
-            }
-            $chartId.append(`<div class="chartPre" id="charts${code}" code="${code}">${res.name}</div>`)
-            id = `charts${code}`;
-        } else {
-            $chartId.append(`<div class="chartPre" id="charts1" code="1">${res.name}</div>`)
-            id = 'charts${code}';
-        }
+        // let charts: any = sessionStorage.getItem('charts')
+        // let $chartId:any = $('#chartId');
+        // let $children:any = $chartId.children('#chartId');
+        // @ts-ignore
+        let code = 0;
+        let id = 'charts${code}';
+        $('.boxsw').append(`<div class="chartPre" style="{position: absolute;top: 0;left: 0;z-index: 10000}" id="charts${code}" code="${code}">${res.name}</div>`)
 
         console.log(res.id)
         switch (res.id) {
@@ -62,7 +51,7 @@ export default class PreviewPlugin extends AbstractEditorPlugin<{}> {
                 break
             }
 
-            case 2:{//折线图
+            case 2: {//折线图
                 this.setLineChart(id)
                 break
             }
@@ -72,8 +61,12 @@ export default class PreviewPlugin extends AbstractEditorPlugin<{}> {
 
     private setBarChart(id) {
         console.log('0000')
-        let chartDom:any = document.getElementById(id);
+        let chartDom: any = document.getElementById(id);
         let myChart = echarts.init(chartDom);
+        let charts: any = sessionStorage.getItem('charts')
+        if (!charts) {
+            charts = []
+        }
         let option;
 
         option = {
@@ -95,13 +88,21 @@ export default class PreviewPlugin extends AbstractEditorPlugin<{}> {
                 }
             ]
         };
-
+        // sessionStorage.setItem()
         option && myChart.setOption(option);
+        // @ts-ignore
+        charts.push(option)
+        // @ts-ignore
+        sessionStorage.setItem('charts', charts)
+        this.scene.metadata.postProcesses = {
+            charts:charts
+        }
     }
 
     private setPieChart(id) {
-        let chartDom:any = document.getElementById(id);
+        let chartDom: any = document.getElementById(id);
         let myChart = echarts.init(chartDom);
+        let charts: any = sessionStorage.getItem('charts')
         let option;
 
         option = {
@@ -123,11 +124,11 @@ export default class PreviewPlugin extends AbstractEditorPlugin<{}> {
                     type: 'pie',
                     radius: '50%',
                     data: [
-                        { value: 1048, name: 'Search Engine' },
-                        { value: 735, name: 'Direct' },
-                        { value: 580, name: 'Email' },
-                        { value: 484, name: 'Union Ads' },
-                        { value: 300, name: 'Video Ads' }
+                        {value: 1048, name: 'Search Engine'},
+                        {value: 735, name: 'Direct'},
+                        {value: 580, name: 'Email'},
+                        {value: 484, name: 'Union Ads'},
+                        {value: 300, name: 'Video Ads'}
                     ],
                     emphasis: {
                         itemStyle: {
@@ -141,13 +142,17 @@ export default class PreviewPlugin extends AbstractEditorPlugin<{}> {
         };
 
         option && myChart.setOption(option);
-
+        // @ts-ignore
+        charts.push(option)
+        // @ts-ignore
+        sessionStorage.setItem('charts', charts)
     }
 
 
     private setLineChart(id) {
-        let chartDom:any = document.getElementById(id);
+        let chartDom: any = document.getElementById(id);
         let myChart = echarts.init(chartDom);
+        let charts: any = sessionStorage.getItem('charts')
         let option;
 
         option = {
@@ -167,7 +172,12 @@ export default class PreviewPlugin extends AbstractEditorPlugin<{}> {
         };
 
         option && myChart.setOption(option);
+        // @ts-ignore
+        charts.push(option)
+        // @ts-ignore
+        sessionStorage.setItem('charts', charts)
     }
+
     /**
      * Renders the component.
      */

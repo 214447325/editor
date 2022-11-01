@@ -21,7 +21,7 @@ export class CanvasChart extends React.Component<any, any>{
 
         return (
             <>
-                <div className="charts" id="chartId" style={{
+                {/* <div className="charts" id="chartId" style={{
 
                     width:'100%',
                     height:'100%',
@@ -33,7 +33,7 @@ export class CanvasChart extends React.Component<any, any>{
                 }} onDragLeave={(res) => {
                     console.log('|||||||||');
                     console.log(res)
-                }}></div>
+                }}></div> */}
 
             </>
         )

@@ -264,6 +264,7 @@ export class AssetsBrowser extends React.Component<IAssetsBrowserProps, IAssetsB
 			"src/scenes/tools.ts",
 			"src/scenes/decorators.ts",
 			"src/scenes/scripts-map.ts",
+			"src/scenes/charts.ts"
 		];
 
 		return files.filter((f) => f.indexOf("index.ts") === -1)

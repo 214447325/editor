@@ -32,6 +32,8 @@ import { GeometryExporter } from "../export/geometry";
 import DirectoryWorker from "../workers/workers/directory";
 import { IWorkerConfiguration, Workers } from "../workers/workers";
 
+import { EditorProcess } from "../tools/process";
+
 export interface IExportFinalSceneOptions {
 	/**
 	 * defines the optional path where to save to final scene.
@@ -183,11 +185,14 @@ export class SceneExporter {
 
 		const scene = SceneSerializer.Serialize(editor.scene!);
 		scene.metadata = scene.metadata ?? {};
+		let charts: any = sessionStorage.getItem('charts') ?? [];
 		scene.metadata.postProcesses = {
 			ssao: { enabled: SceneSettings.IsSSAOEnabled(), json: SceneSettings.SSAOPipeline?.serialize() },
 			screenSpaceReflections: { enabled: SceneSettings.IsScreenSpaceReflectionsEnabled(), json: SceneSettings.ScreenSpaceReflectionsPostProcess?.serialize() },
 			default: { enabled: SceneSettings.IsDefaultPipelineEnabled(), json: SceneSettings.SerializeDefaultPipeline() },
 			motionBlur: { enabled: SceneSettings.IsMotionBlurEnabled(), json: SceneSettings.MotionBlurPostProcess?.serialize() },
+			test:"ffff",
+			charts:charts
 		};
 
 
@@ -659,6 +664,23 @@ export class SceneExporter {
 		const scriptsMap = await readFile(join(AppTools.GetAppPath(), "assets", "scripts", "scripts-map.ts"), { encoding: "utf-8" });
 		const newScriptsMap = await this._UpdateScriptContent(editor, scriptsMap);
 		await writeFile(join(WorkSpace.DirPath!, "src", "scenes", "scripts-map.ts"), newScriptsMap, { encoding: "utf-8" });
+
+		const scriptsMap1 = await readFile(join(AppTools.GetAppPath(), "assets", "scripts", "chen.ts"), { encoding: "utf-8" });
+		const newScriptsMap1 = await this._UpdateScriptContent(editor, scriptsMap1);
+		await writeFile(join(WorkSpace.DirPath!, "src", "scenes", "chen.ts"), newScriptsMap1, { encoding: "utf-8" });
+
+
+
+
+
+		const scriptsMap2 = await readFile(join(AppTools.GetAppPath(), "assets", "scripts", "charts.ts"), { encoding: "utf-8" });
+		const newScriptsMap2 = await this._UpdateScriptContent(editor, scriptsMap2);
+		await writeFile(join(WorkSpace.DirPath!, "src", "scenes", "charts.ts"), newScriptsMap2, { encoding: "utf-8" });
+
+
+
+		await EditorProcess.ExecuteCommand(`npm i jquery --save-dev`);
+		await EditorProcess.ExecuteCommand(`npm i @types/jquery --save-dev`);
 
 		// Export scene content
 		/*
