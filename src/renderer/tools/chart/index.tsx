@@ -32,8 +32,8 @@ export default class PreviewPlugin extends AbstractEditorPlugin<{}> {
         console.log(e)
         console.log(res)
         // @ts-ignore
-        let charts: any = JSON.parse(sessionStorage.getItem('charts'))
-
+        let charts: any = sessionStorage.getItem('charts')
+        charts = charts ? JSON.parse(charts) : [];
 
         let option = {}
 

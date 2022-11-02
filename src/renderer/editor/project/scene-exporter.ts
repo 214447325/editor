@@ -185,14 +185,15 @@ export class SceneExporter {
 
 		const scene = SceneSerializer.Serialize(editor.scene!);
 		scene.metadata = scene.metadata ?? {};
-		let charts: any = sessionStorage.getItem('charts') ?? [];
+		// @ts-ignore
+		let charts: any = sessionStorage.getItem('charts')  ? JSON.parse(sessionStorage.getItem('charts')) :  [];
 		scene.metadata.postProcesses = {
 			ssao: { enabled: SceneSettings.IsSSAOEnabled(), json: SceneSettings.SSAOPipeline?.serialize() },
 			screenSpaceReflections: { enabled: SceneSettings.IsScreenSpaceReflectionsEnabled(), json: SceneSettings.ScreenSpaceReflectionsPostProcess?.serialize() },
 			default: { enabled: SceneSettings.IsDefaultPipelineEnabled(), json: SceneSettings.SerializeDefaultPipeline() },
 			motionBlur: { enabled: SceneSettings.IsMotionBlurEnabled(), json: SceneSettings.MotionBlurPostProcess?.serialize() },
 			test:"ffff",
-			charts:JSON.parse(charts)
+			charts:charts
 		};
 
 
@@ -513,6 +514,8 @@ export class SceneExporter {
 		// Write scene
 		editor.updateTaskFeedback(task, 50, "Writing scene...");
 		await writeJSON(join(scenePath, "scene.babylon"), scene);
+		await writeJSON(join(scenePath, "scene.babylon45"), '');
+		await console.log('1111111111')
 
 		// Tools
 		await this.GenerateScripts(editor);

@@ -1,4 +1,4 @@
-import React,{useRef} from "react";
+import React, {useRef} from "react";
 
 const Drag = (props) => {
     let isMoving = false;
@@ -49,26 +49,26 @@ const Drag = (props) => {
         console.log(div.style.cssText)
 
         // @ts-ignore
-        let charts: any = JSON.parse(sessionStorage.getItem('charts')) ?JSON.parse(sessionStorage.getItem('charts')) :[];
+        let charts: any = sessionStorage.getItem('charts') ? JSON.parse(sessionStorage.getItem('charts')) : [];
         const id = `cid${props.id}`
         let _json_ = {
-            option:props.option,
-            style:div.style ? div.style.cssText : '',
-            id:id
+            option: props.option,
+            style: div.style ? div.style.cssText : '',
+            id: id
         }
 
         let k = true;
-        for(let i in charts) {
-            if(charts[i].id == id) {
+        for (let i in charts) {
+            if (charts[i].id == id) {
                 charts[i] = _json_;
                 k = false;
             }
         }
-        if(k) {
+        if (k) {
             charts.push(_json_)
         }
 
-        sessionStorage.setItem('charts',JSON.stringify(charts))
+        sessionStorage.setItem('charts', JSON.stringify(charts))
 
     }
 
@@ -91,7 +91,7 @@ const Drag = (props) => {
             onClick={props.onClick}
             // @ts-ignore
             ref={movingDiv}
-            style={{ ...styles, ...props.style }} //样式可自定义并覆盖
+            style={{...styles, ...props.style}} //样式可自定义并覆盖
         >
 
             <div
