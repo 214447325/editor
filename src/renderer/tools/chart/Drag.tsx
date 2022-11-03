@@ -47,6 +47,7 @@ const Drag = (props) => {
         console.log('--------------------------------------------------');
         // @ts-ignore
         console.log(div.style.cssText)
+        console.log(div.style)
 
         // @ts-ignore
         let charts: any = sessionStorage.getItem('charts') ? JSON.parse(sessionStorage.getItem('charts')) : [];

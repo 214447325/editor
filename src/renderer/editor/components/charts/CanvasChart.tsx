@@ -7,7 +7,7 @@ export class CanvasChart extends React.Component<any, any>{
     constructor(props) {
         super(props);
         console.log('dddd')
-        sessionStorage.setItem('test','dd')
+        // sessionStorage.setItem('test','dd')
         // this._scene.s
         // this._scene.a.test = 'ddd'
         // this._scene['atest'].set('dsssss')
@@ -21,11 +21,11 @@ export class CanvasChart extends React.Component<any, any>{
 
         return (
             <>
-                <div></div>
-                {/* <div className="charts" id="chartId" style={{
+                {/*<div>ddd</div>*/}
+                 <div className="charts" id="chartId" style={{
 
-                    width:'100%',
-                    height:'100%',
+                    width:'auto',
+                    height:'auto',
                     position:'absolute',
                     top:'0',
                     left:'0',
@@ -34,7 +34,7 @@ export class CanvasChart extends React.Component<any, any>{
                 }} onDragLeave={(res) => {
                     console.log('|||||||||');
                     console.log(res)
-                }}></div> */}
+                }}></div>
 
             </>
         )

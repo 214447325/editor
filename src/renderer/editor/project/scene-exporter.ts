@@ -187,15 +187,17 @@ export class SceneExporter {
 		scene.metadata = scene.metadata ?? {};
 		// @ts-ignore
 		let charts: any = sessionStorage.getItem('charts')  ? JSON.parse(sessionStorage.getItem('charts')) :  [];
+		// let charts = essionStorage.getItem('charts') ?? [];
 		scene.metadata.postProcesses = {
 			ssao: { enabled: SceneSettings.IsSSAOEnabled(), json: SceneSettings.SSAOPipeline?.serialize() },
 			screenSpaceReflections: { enabled: SceneSettings.IsScreenSpaceReflectionsEnabled(), json: SceneSettings.ScreenSpaceReflectionsPostProcess?.serialize() },
 			default: { enabled: SceneSettings.IsDefaultPipelineEnabled(), json: SceneSettings.SerializeDefaultPipeline() },
 			motionBlur: { enabled: SceneSettings.IsMotionBlurEnabled(), json: SceneSettings.MotionBlurPostProcess?.serialize() },
-			test:"ffff",
+			test:"ffff888",
 			charts:charts
 		};
-
+		// scene.metadata = scene.metadata ?? [];
+		scene.charts= [charts]
 
 		// Animation Groups
 		scene.animationGroups ??= [];
@@ -684,6 +686,9 @@ export class SceneExporter {
 
 		await EditorProcess.ExecuteCommand(`npm i jquery --save-dev`);
 		await EditorProcess.ExecuteCommand(`npm i @types/jquery --save-dev`);
+		await EditorProcess.ExecuteCommand(`npm i echarts --save`);
+		// await EditorProcess.ExecuteCommand(`npm i  @types/echarts --save`);
+
 
 		// Export scene content
 		/*

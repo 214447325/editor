@@ -124,6 +124,7 @@ export default class PreviewPlugin extends AbstractEditorPlugin<{}> {
         // @ts-ignore
         let code = charts ? charts.length : 0;
         $('.boxsw').append(`<div class="chartPre" id="charts${code}" code="${code}">${res.name}</div>`)
+        let id = `charts${code}`
         // @ts-ignore
         ReactDOM.render(<div><Drag id={code} option={option} /></div>,document.getElementById(id))
 
@@ -137,87 +138,6 @@ export default class PreviewPlugin extends AbstractEditorPlugin<{}> {
         let myChart = echarts.init(chartDom);
         option && myChart.setOption(option);
     }
-
-    // private setPieChart(id) {
-    //     let chartDom: any = document.getElementById(id);
-    //     let myChart = echarts.init(chartDom);
-    //     // @ts-ignore
-    //     let charts: any = JSON.parse(localStorage.getItem('charts'))
-    //     let option;
-
-    //     option = {
-    //         title: {
-    //             text: 'Referer of a Website',
-    //             subtext: 'Fake Data',
-    //             left: 'center'
-    //         },
-    //         tooltip: {
-    //             trigger: 'item'
-    //         },
-    //         legend: {
-    //             orient: 'vertical',
-    //             left: 'left'
-    //         },
-    //         series: [
-    //             {
-    //                 name: 'Access From',
-    //                 type: 'pie',
-    //                 radius: '50%',
-    //                 data: [
-    //                     {value: 1048, name: 'Search Engine'},
-    //                     {value: 735, name: 'Direct'},
-    //                     {value: 580, name: 'Email'},
-    //                     {value: 484, name: 'Union Ads'},
-    //                     {value: 300, name: 'Video Ads'}
-    //                 ],
-    //                 emphasis: {
-    //                     itemStyle: {
-    //                         shadowBlur: 10,
-    //                         shadowOffsetX: 0,
-    //                         shadowColor: 'rgba(0, 0, 0, 0.5)'
-    //                     }
-    //                 }
-    //             }
-    //         ]
-    //     };
-
-    //     option && myChart.setOption(option);
-    //     // @ts-ignore
-    //     charts.push(option)
-    //     // @ts-ignore
-    //     localStorage.setItem('charts', JSON.stringify(charts))
-    // }
-
-
-    // private setLineChart(id) {
-    //     let chartDom: any = document.getElementById(id);
-    //     let myChart = echarts.init(chartDom);
-    //     // @ts-ignore
-    //     let charts: any = JSON.parse(localStorage.getItem('charts'))
-    //     let option;
-
-    //     option = {
-    //         xAxis: {
-    //             type: 'category',
-    //             data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-    //         },
-    //         yAxis: {
-    //             type: 'value'
-    //         },
-    //         series: [
-    //             {
-    //                 data: [150, 230, 224, 218, 135, 147, 260],
-    //                 type: 'line'
-    //             }
-    //         ]
-    //     };
-
-    //     option && myChart.setOption(option);
-    //     // @ts-ignore
-    //     charts.push(option)
-    //     // @ts-ignore
-    //     localStorage.setItem('charts', JSON.stringify(charts))
-    // }
 
     /**
      * Renders the component.
