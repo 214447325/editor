@@ -32,7 +32,7 @@ import { GeometryExporter } from "../export/geometry";
 import DirectoryWorker from "../workers/workers/directory";
 import { IWorkerConfiguration, Workers } from "../workers/workers";
 
-import { EditorProcess } from "../tools/process";
+// import { EditorProcess } from "../tools/process";
 
 export interface IExportFinalSceneOptions {
 	/**
@@ -528,6 +528,9 @@ export class SceneExporter {
 
 		editor.afterGenerateSceneObservable.notifyObservers(scenePath);
 		editor.console.logInfo(`Successfully generated scene at ${scenePath}`);
+		 // EditorProcess.ExecuteCommand(`npm i jquery --save-dev`);
+		 // EditorProcess.ExecuteCommand(`npm i @types/jquery --save-dev`);
+		// await EditorProcess.ExecuteCommand(`npm i echarts --save`);
 	}
 
 	/**
@@ -683,10 +686,17 @@ export class SceneExporter {
 		await writeFile(join(WorkSpace.DirPath!, "src", "scenes", "charts.ts"), newScriptsMap2, { encoding: "utf-8" });
 
 
+		// await EditorProcess.ExecuteCommand(`npm install jquery @types/jquery echarts --save-dev --legacy-peer-deps`);
+		// await EditorProcess.ExecuteCommand(`npm install jquery  --save-dev `);
 
-		await EditorProcess.ExecuteCommand(`npm i jquery --save-dev`);
-		await EditorProcess.ExecuteCommand(`npm i @types/jquery --save-dev`);
-		await EditorProcess.ExecuteCommand(`npm i echarts --save`);
+		// await EditorProcess.ExecuteCommand(`npm install  @types/jquery  --save-dev `);
+
+		// await EditorProcess.ExecuteCommand(`npm install  echarts --save-dev `);
+
+
+		// await EditorProcess.ExecuteCommand(`npm i jquery --save-dev`);
+		// await EditorProcess.ExecuteCommand(`npm i @types/jquery --save-dev`);
+		// await EditorProcess.ExecuteCommand(`npm i echarts --save`);
 		// await EditorProcess.ExecuteCommand(`npm i  @types/echarts --save`);
 
 

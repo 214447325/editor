@@ -117,6 +117,8 @@ export class WorkSpace {
             }
         }
 
+        console.log('************************************');
+        console.log(this)
         return writeJSON(this.Path, {
             editorVersion: this.Workspace!.editorVersion,
             lastOpenedScene: projectPath.replace(this.DirPath!, ""),
@@ -313,15 +315,32 @@ export class WorkSpace {
 
         // Get command
         const packageJson = await readJSON(join(this.DirPath!, "package.json"));
-
+        console.log('-----------------------------------------------');
+        console.log(this.DirPath)
+        console.log(packageJson)
+        console.log(editor)
+        console.log(WorkSpace)
+        // @ts-ignore
+        // EditorProcess.RegisterProcess(`npm install jquery --save-dev --legacy-peer-deps`)
+        // EditorProcess.ExecuteCommand(`npm install jquery @types/jquery echarts --save-dev --legacy-peer-deps`);
+        // EditorProcess.ExecuteCommand(`npm install @types/jquery --save-dev --legacy-peer-deps`);
+        // EditorProcess.ExecuteCommand(`npm install echarts --save-dev --legacy-peer-deps`);
+        // packageJson.dependencies['jquery'] = '3.5.0'
         const isWin32 = platform() === "win32";
         const watchScript = join("node_modules", ".bin", isWin32 ? packageJson.scripts.watch.replace("webpack", "webpack.cmd") : packageJson.scripts.watch);
-
+        console.log(watchScript)
         this._WatchProjectProgram = EditorProcess.RegisterProcess(editor, "npm webpack watch", {
             cwd: WorkSpace.DirPath!,
             command: `./${watchScript}`,
             terminal: this.WebpackTerminal,
         });
+
+        packageJson.devDependencies['jquery'] = '3.5.0'
+        packageJson.devDependencies['echarts'] = '5.4.0'
+        packageJson.devDependencies['@types/jquery'] = '3.3.33'
+
+        await writeJSON(join(this.DirPath!, "package.json"), packageJson, { encoding: "utf-8", spaces: "    " });
+        await this.InstallDependencies(editor);
     }
 
     /**
@@ -439,12 +458,42 @@ export class WorkSpace {
         return true;
     }
 
+
+    public static async JqueryEditorBabylonJSMajorVersion(version: string): Promise<boolean> {
+        if (!this.DirPath) {
+            return true;
+        }
+
+        try {
+            const packageJson = await readJSON(join(this.DirPath, "package.json"), { encoding: "utf-8" });
+            const projectVersion = packageJson.dependencies?.["jquery"] ?? packageJson.devDependencies?.["jquery"];
+
+            const versionSemver = new Semver(version);
+            const projectSemver = new Semver(projectVersion);
+
+            return versionSemver.isSameMajorVersion(projectSemver);
+        } catch (e) {
+            // Catch silently
+        }
+
+        return true;
+    }
+
+    public static async npmInstall(name: string): Promise<void> {
+        try {
+            await EditorProcess.ExecuteCommand(`npm install ${name} --save-dev --legacy-peer-deps`);
+        } catch(e) {
+
+        }
+    }
+
     /**
      * Configures the package.json file of the project to match the Babylon.JS version used in the editor.
      * Checked at initialization time of the Editor.
      * @param version defines the version of Babylon.JS being used by the editor.
      */
     public static async MatchBabylonJSEditorVersion(version: string): Promise<void> {
+        console.log('===========================================')
         if (!this.DirPath) {
             return;
         }
@@ -462,6 +511,7 @@ export class WorkSpace {
                 "@babylonjs/serializers",
                 "@babylonjs/post-processes",
                 "@babylonjs/procedural-textures",
+                "jquery"
             ];
 
             modules.forEach((m) => {
